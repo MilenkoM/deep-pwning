@@ -10,7 +10,7 @@ import random
 import tarfile
 
 from six.moves import urllib
-from six.moves import xrange
+from six.moves import range
 
 import numpy as np
 import tensorflow as tf
@@ -42,7 +42,7 @@ def maybe_download(config, filename, extract=False):
             filepath, _progress)
         print()
         with tf.gfile.GFile(filepath) as f:
-            size = f.Size()
+            size = f.size()
         print('Successfully downloaded', filename, size, 'bytes.')
     if extract:
         tarfile.open(filepath, 'r:gz').extractall(work_directory)
@@ -159,7 +159,7 @@ def cifar10_inputs(config, distort=False, whiten=True, for_eval=False, shuffle=F
     batch_size = int(config.get('main', 'batch_size'))
 
     if not for_eval:
-        filenames = [os.path.join(data_dir, 'data_batch_%d.bin' % i) for i in xrange(1, 6)]
+        filenames = [os.path.join(data_dir, 'data_batch_%d.bin' % i) for i in range(1, 6)]
         num_examples_per_epoch = int(config.get('main', 'num_examples_per_epoch_train'))
     else:
         filenames = [os.path.join(data_dir, 'test_batch.bin')]

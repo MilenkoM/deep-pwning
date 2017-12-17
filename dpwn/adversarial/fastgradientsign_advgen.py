@@ -53,11 +53,11 @@ class FastGradientSign_AdvGen:
         start_time = time.time()
 
         if self.cmd_args.test:
-            iter_range = xrange(1)
+            iter_range = range(1)
             adversarial_perturbation_max = adversarial_perturbation_min
             adversarial_perturbation_steps = 1
         else:
-            iter_range = xrange(len(test_data))
+            iter_range = range(len(test_data))
 
         for idx in iter_range:
             if idx % eval_frequency == 0:
@@ -127,7 +127,7 @@ class FastGradientSign_AdvGen:
                 on_value=1.0, 
                 off_value=0.0)
 
-            cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits, y_)
+            cross_entropy = tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=logits)
             grad = tf.gradients(cross_entropy, images)
 
             with tf.Session() as sess:

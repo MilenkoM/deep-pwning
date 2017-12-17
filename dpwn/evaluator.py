@@ -29,7 +29,7 @@ class Evaluator:
         if size < batch_size:
             raise ValueError("batch size for evals larger than dataset: %d" % size)
         predictions = np.ndarray(shape=(size, num_classes), dtype=np.float32)
-        for begin in xrange(0, size, batch_size):
+        for begin in range(0, size, batch_size):
             end = begin + batch_size
             if end <= size:
                 predictions[begin:end, :] = sess.run(
@@ -72,9 +72,9 @@ class Evaluator:
                 print('No checkpoint to load, training model from scratch...')
 
                 if self.cmd_args.test:
-                    iter_range = xrange(1)
+                    iter_range = range(1)
                 else:
-                    iter_range = xrange(int(num_epochs * train_size) // batch_size)
+                    iter_range = range(int(num_epochs * train_size) // batch_size)
 
                 for step in iter_range:
                     offset = (step * batch_size) % (train_size - batch_size)

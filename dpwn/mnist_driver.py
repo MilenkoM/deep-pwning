@@ -1,17 +1,11 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import gzip
 import os
 import sys
 import time
 import pickle
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 
 import numpy as np
-from six.moves import urllib
-from six.moves import xrange
 import tensorflow as tf
 
 import utils.utils as utils
@@ -64,7 +58,7 @@ def main(argv=None):
     y_conv, logits, keep_prob, param_dict = lenet5.model(x)
 
     loss = tf.reduce_mean(
-        tf.nn.sparse_softmax_cross_entropy_with_logits(logits, y_))
+        tf.nn.sparse_softmax_cross_entropy_with_logits(labels=y_, logits=logits))
 
     # L2 regularization for the fully connected parameters.
     regularizers = (tf.nn.l2_loss(param_dict['fc1_W']) 

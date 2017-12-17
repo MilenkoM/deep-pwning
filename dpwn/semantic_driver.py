@@ -11,8 +11,6 @@ import datetime
 from ConfigParser import SafeConfigParser
 
 import numpy as np
-from six.moves import urllib
-from six.moves import xrange
 import tensorflow as tf
 from tensorflow.contrib import learn
 
@@ -105,7 +103,7 @@ def main(argv=None):
     y_conv, logits, keep_prob, l2_loss, embedded_words, embed_W = semantic_cnn.model(x)
 
     loss = tf.reduce_mean(
-        tf.nn.softmax_cross_entropy_with_logits(logits, y_))
+        tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=logits))
 
     # Add the regularization term to the loss.
     loss += 5e-4 * l2_loss

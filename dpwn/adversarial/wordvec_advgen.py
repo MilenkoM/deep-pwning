@@ -47,9 +47,9 @@ class WordVec_AdvGen:
         start_time = time.time()
 
         if self.cmd_args.test:
-            iter_range = xrange(1)
+            iter_range = range(1)
         else:
-            iter_range = xrange(len(test_data))
+            iter_range = range(len(test_data))
 
         for idx in iter_range:
             if idx % eval_frequency == 0:

@@ -12,8 +12,6 @@ import math
 from ConfigParser import SafeConfigParser
 
 import numpy as np
-from six.moves import urllib
-from six.moves import xrange
 import tensorflow as tf
 
 import matplotlib.pyplot as plt
@@ -32,7 +30,7 @@ def calculate_loss(logits, labels):
     # Calculate the average cross entropy loss across the batch.
     labels = tf.cast(labels, tf.int64)
     cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(
-        logits, labels, name='cross_entropy_per_example')
+        labels=labels, logits=logits, name='cross_entropy_per_example')
     cross_entropy_mean = tf.reduce_mean(cross_entropy, name='cross_entropy')
     tf.add_to_collection('losses', cross_entropy_mean)
 
@@ -185,7 +183,7 @@ def main(argv=None):
 
             num_batches_to_run = int(config.get('main', 'num_batches_to_run'))
 
-            for step in xrange(num_batches_to_run):
+            for step in range(num_batches_to_run):
                 start_time = time.time()
                 _, loss_value = sess.run([train_op, loss])
                 duration = time.time() - start_time
