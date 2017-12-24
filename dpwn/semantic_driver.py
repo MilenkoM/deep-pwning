@@ -1,14 +1,10 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import gzip
 import os
 import sys
 import re
 import time
 import datetime
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 
 import numpy as np
 import tensorflow as tf

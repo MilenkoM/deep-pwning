@@ -86,7 +86,7 @@ class SemanticCNN:
             self.conv2d(embedded_words_expanded, pool_filter5_W), pool_filter5_b))
         pool_filter5 = self.max_pool(conv3, 5)
 
-        pool_combined = tf.concat(3, [pool_filter3, pool_filter4, pool_filter5])
+        pool_combined = tf.concat([pool_filter3, pool_filter4, pool_filter5], 3)
         pool_final = tf.reshape(pool_combined, [-1, self.num_filters * 3])
 
         dropout = tf.nn.dropout(pool_final, keep_prob)

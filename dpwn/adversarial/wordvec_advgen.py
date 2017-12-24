@@ -94,15 +94,18 @@ class WordVec_AdvGen:
             adv_pred = sess.run(y_conv, feed_dict={x:[adv_x_sample], keep_prob:1.0})
             adv_pred_label = np.argmax(pred)
 
-            print("Original test string:    \"" + x_sample_str + "\"")
-            print("Adversarial test string: \"" + adv_x_sample_str + "\"")
-            print("Correct Label: {0}, Predicted Label: {1}, Adversarial Label: {2}"
-                .format(correct_label, pred_label, adv_pred_label))
-            if correct_label == pred_label:
-                print("Correct Prediction.\n")
+            if pred_label != adv_pred_label and correct_label == pred_label:
+                print("Original test string:    \"" + x_sample_str + "\"")
+                print("Adversarial test string: \"" + adv_x_sample_str + "\"")
+                print("Correct Label: {0}, Predicted Label: {1}, Adversarial Label: {2}".format(correct_label, pred_label, adv_pred_label))
             else:
-                print("\n")
+                print("Adversary or label was off")
+                print("WRONG: Original test string:    \"" + x_sample_str + "\"")
+                print("WRONG: Adversarial test string: \"" + adv_x_sample_str + "\"")
+                print("WRONG: Correct Label: {0}, Predicted Label: {1}, Adversarial Label: {2}".format(correct_label, pred_label, adv_pred_label))
+            print("\n")
+
             if pred_label != adv_pred_label:
                 num_differs = num_differs + 1
-                print("Adversarial prediction differs.\n")
+
         print("Number of differing adversarial predictions: (smaller is better) " + str(num_differs))
